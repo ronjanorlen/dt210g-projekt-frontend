@@ -1,9 +1,9 @@
 const CreateAccountPage = () => {
   return (
-    <div>CreateAccountPage</div>
-
-    // Skapa konto-sida
-
+     // Skapa konto-sida
+    <div>
+      <h1>Skapa konto</h1>
+    </div>
   )
 }
 
