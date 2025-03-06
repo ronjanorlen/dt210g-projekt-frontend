@@ -5,6 +5,7 @@ import MyAccountPage from "./pages/MyAccountPage";
 import BookInfoPage from "./pages/BookInfoPage";
 import CreateAccountPage from "./pages/CreateAccountPage";
 import Layout from "./components/Layout";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const router = createBrowserRouter([
     {
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
             {
                 path: "/login",
                 element: <LoginPage />
-            }, 
+            },
             {
                 path: "/book/:id",
                 element: <BookInfoPage />
@@ -29,7 +30,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "/my-account", // Skyddad sida
-                element: <MyAccountPage />
+                element: (
+                    <ProtectedRoute>
+                        <MyAccountPage />
+                    </ProtectedRoute>
+                )
             }
         ]
     }
