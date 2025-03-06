@@ -1,7 +1,7 @@
 // Interface för användare 
 export interface User {
-   // _id: string,
-    id: string, // ev frågetecken bakom id?
+   _id: string,
+    id?: string, 
     username: string,
     password: string
 }

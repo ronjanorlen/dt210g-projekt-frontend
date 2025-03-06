@@ -1,4 +1,6 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   // States 
@@ -6,9 +8,31 @@ const LoginPage = () => {
   const [password, setPassword] = useState(""); // lösenord 
   const [error, setError] = useState(""); // Felmeddelanden 
 
+  const {login, user} = useAuth();
+  const navigate = useNavigate();
+
+  // Kontrollera använddare 
+  useEffect(() => {
+    // Om user inte är null 
+    if(user) {
+      navigate("/my-account");
+    }
+  }, [user])
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // förhindra sidomladdning
     setError(""); // nollställ error-state 
+
+    try {
+      
+      await login({username, password}); // Skicka med användarnamn och lösen 
+      // Om ok, skicka användaren till profil-sida 
+      navigate("/my-account");
+
+      // fånga fel 
+    } catch (error) {
+      setError("Misslyckad inloggning, kontrollera inloggningsuppgifter")
+    }
   };
 
   return (
