@@ -39,7 +39,7 @@ const LoginPage = () => {
     // Logga in-formulär
     <div className="login-container">
       <div className="login-box">
-        <h2><i className="fa-solid fa-user"></i> Logga in</h2>
+        <h2>Logga in</h2>
 
         <form className="loginForm" onSubmit={handleSubmit}>
           {error && (
