@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react"
 import { BookInterface } from "../types/BookInterface"
+import { ReviewInterface } from "../types/ReviewInterface"
 import { Link } from "react-router-dom"
 import { useParams } from "react-router-dom"
 
-  // Sida för enskild bok. kunna skapa recensioner här? 
+// Sida för enskild bok. kunna skapa recensioner här? 
 
 const BookInfoPage = () => {
 
@@ -11,13 +12,15 @@ const BookInfoPage = () => {
 
   // States 
   const [book, setBook] = useState<BookInterface | null>(null);
+  const [reviews, setReviews] = useState<ReviewInterface[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // useEffect för hämtning av bok 
+  // useEffect för hämtning av bok och recensioner 
   useEffect(() => {
     if (id) {
       getBook(id);
+      getReviews(id);
     }
   }, [id]);
 
@@ -49,9 +52,36 @@ const BookInfoPage = () => {
     }
   }
 
+  // Hämta recensioner till boken 
+  const getReviews = async (bookId: string) => {
+    try {
+      const res = await fetch(`http://localhost:5000/reviews?bookId=${bookId}`);
+      
+      // om inte ok 
+      if (!res.ok) {
+        if (res.status === 404) {
+          setReviews([]); // om inga recensioner finns, sätt tom array 
+        } else { // ananrs kasta fel
+          throw new Error("Kunde inte hämta recensionerna");
+        }
+        
+      } else {
+            // om ok 
+      const data = await res.json();
+      
+      setReviews(data);
+      }
+
+      // Fånga fel 
+    } catch (error) {
+      console.log(error);
+      setError("Något gick fel vid hämtning av recensionerna");
+    }
+  }
+
 
   return (
-  
+
     <div className="bookDet">
       <h1>Bokdetaljer</h1>
 
@@ -66,12 +96,13 @@ const BookInfoPage = () => {
 
       {error && <p className="error-msg">{error}</p>}
 
+      {/* Skriv ut bok */}
       {book ? (
         <div>
           <h2>{book.volumeInfo.title}</h2>
           {book.volumeInfo.authors && (
             <p>
-              <strong>Av:</strong> {book.volumeInfo.authors.join(", ") || "Okänd" } 
+              <strong>Av:</strong> {book.volumeInfo.authors.join(", ") || "Okänd"}
             </p>
           )}
           {book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail && (
@@ -82,6 +113,24 @@ const BookInfoPage = () => {
         !loading && <p>Ingen bok hittades.</p>
       )}
 
+      {/* Skriv ut recensioner för boken */}
+
+      <h2>Recensioner</h2>
+      {reviews.length > 0 ? (
+        <ul>
+          {reviews.map((review) => (
+            <li key={review._id}>
+              <strong>{review.username}</strong> - {review.rating}/5
+              <p>{review.reviewText}</p>
+              <p>{new Date(review.createdAt).toLocaleDateString()}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>Denna bok har inte fått någon recension än</p>
+      )}
+
+      {/* Tillbaks til startsida */}
       <Link to="/">Tillbaka</Link>
     </div>
   )

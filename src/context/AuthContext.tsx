@@ -73,7 +73,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
             const data = await res.json();
        //    console.log("Hämtad användare: ", data); // Ta bort sen
-         setUser(data.user);
+         setUser(data.user.user);
 
             // Fånga fel 
         } catch (error) {

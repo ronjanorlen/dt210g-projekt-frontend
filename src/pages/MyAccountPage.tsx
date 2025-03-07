@@ -1,4 +1,5 @@
 import { useAuth } from "../context/AuthContext"
+import { BookInterface } from "../types/BookInterface";
 
 const MyAccountPage = () => {
 
@@ -8,7 +9,7 @@ const MyAccountPage = () => {
      // Inloggad användares profilsida, se och hantera alla sina recensioner 
     <div>
       <h1>Min profil</h1>
-      <h2>Hej {user ? user.username : ""}</h2>
+      <h2>Hej {user ? user.username : ""}!</h2>
     </div>
     
    
