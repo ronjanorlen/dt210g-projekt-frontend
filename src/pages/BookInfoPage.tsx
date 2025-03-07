@@ -56,7 +56,7 @@ const BookInfoPage = () => {
   const getReviews = async (bookId: string) => {
     try {
       const res = await fetch(`http://localhost:5000/reviews?bookId=${bookId}`);
-      
+
       // om inte ok 
       if (!res.ok) {
         if (res.status === 404) {
@@ -64,12 +64,12 @@ const BookInfoPage = () => {
         } else { // ananrs kasta fel
           throw new Error("Kunde inte hämta recensionerna");
         }
-        
+
       } else {
-            // om ok 
-      const data = await res.json();
-      
-      setReviews(data);
+        // om ok 
+        const data = await res.json();
+
+        setReviews(data);
       }
 
       // Fånga fel 
@@ -130,7 +130,17 @@ const BookInfoPage = () => {
         <p>Denna bok har inte fått någon recension än</p>
       )}
 
-      {/* Tillbaks til startsida */}
+      {/* Till formulär för att skriva recension */}
+      
+      {book && (
+        <Link
+          to={`/create-review/${book.id}`} >
+          Skriv recension
+        </Link>
+      )}
+
+
+      {/* Tillbaks till startsida */}
       <Link to="/">Tillbaka</Link>
     </div>
   )
