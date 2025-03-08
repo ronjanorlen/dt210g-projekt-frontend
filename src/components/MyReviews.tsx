@@ -48,7 +48,30 @@ const fetchReviews = async () => {
         console.error(error);
         setError("Misslyckades med att hämta recensioner");
     }
+}
 
+// Ta bort recension 
+const deleteReview = async (id: string) => {
+
+    if (!window.confirm("Vill du verkligen ta bort denna recension?")) return;
+
+    try {
+        const res = await fetch(`http://localhost:5000/reviews/${id}`, {
+            method: "DELETE",
+            credentials: "include"
+        });
+
+        // om inte ok 
+        if (!res.ok) throw new Error("Kunde ej ta bort recension");
+
+        // annars ta bort och uppdatera staten 
+        setReviews(reviews.filter((rec) => rec._id !==id));
+
+        // Fånga fel
+    } catch (error) {
+        console.error(error);
+        setError("Något blev fel vid borttagning av recension");
+    }
 }
 
 
@@ -69,6 +92,8 @@ const fetchReviews = async () => {
               <p>Betyg: {review.rating}/5</p> 
               <p>{review.reviewText}</p>
               <p>Skapad: {review.created ? new Date(review.created).toLocaleDateString() : ""}</p>
+              <button onClick={() => deleteReview(review._id ?? "")}>Ta bort</button>
+              <button>Redigera</button>
               <hr />
             </div>
           ))}

@@ -43,7 +43,7 @@ const ReviewForm = () => {
 
         console.log("skickar data: ", review); // Ta bort sen 
          
-
+        // POST-anrop
         try {
             const res = await fetch("http://localhost:5000/reviews", {
                 method: "POST",
