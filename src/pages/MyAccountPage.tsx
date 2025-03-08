@@ -1,5 +1,6 @@
 import { useAuth } from "../context/AuthContext"
 import { BookInterface } from "../types/BookInterface";
+import MyReviews from "../components/MyReviews";
 
 const MyAccountPage = () => {
 
@@ -10,6 +11,7 @@ const MyAccountPage = () => {
     <div>
       <h1>Min profil</h1>
       <h2>Hej {user ? user.username : ""}!</h2>
+      <MyReviews />
     </div>
     
    

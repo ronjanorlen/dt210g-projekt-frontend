@@ -130,11 +130,12 @@ const BookInfoPage = () => {
       {reviews.length > 0 ? (
         <ul>
           {reviews.map((review) => (
-            <li key={review._id}>
+            <div key={review._id}>
               <strong>{review.username}</strong> - {review.rating}/5
               <p>{review.reviewText}</p>
               <p>Skapad: {review.created ? new Date(review.created).toLocaleDateString() : ""}</p>
-            </li>
+              <hr />
+            </div>
           ))}
         </ul>
       ) : (
