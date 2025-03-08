@@ -38,7 +38,7 @@ const router = createBrowserRouter([
                 )
             },
             {
-                path: "/create-review/:bookId?", // Skyddad sida - lägg till bokid för att koppla
+                path: "/create-review/:bookId?", // Skyddad sida 
                 element: (
                     <ProtectedRoute>
                         <CreateReviewPage />

@@ -1,10 +1,11 @@
 export interface ReviewInterface {
     _id?: string;
     bookId?: string;
-    userId?: string;
+    bookTitle: string;
+    userId?:  string;
     username: string;
     reviewText: string;
     rating: number;
-    createdAt: string;
+    created?: string;
     __v?: number;
 }

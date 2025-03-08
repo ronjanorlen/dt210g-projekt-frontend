@@ -12,6 +12,7 @@ const CreateReviewPage = () => {
     <div>
         <h1>Skapa recension</h1>
         <ReviewForm />
+        
     </div>
   )
 }

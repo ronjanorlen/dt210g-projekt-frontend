@@ -113,8 +113,19 @@ const BookInfoPage = () => {
         !loading && <p>Ingen bok hittades.</p>
       )}
 
-      {/* Skriv ut recensioner för boken */}
+      {/* Tillbaks till startsida */}
+      <Link to="/">Tillbaka</Link>
 
+      {/* Till formulär för att skriva recension */}
+      {book && (
+        <Link
+          to={`/create-review/${book.id}`} state={{ title: book.volumeInfo.title }} >
+          Skriv recension
+        </Link>
+      )}
+
+
+      {/* Skriv ut recensioner för boken */}
       <h2>Recensioner</h2>
       {reviews.length > 0 ? (
         <ul>
@@ -122,26 +133,13 @@ const BookInfoPage = () => {
             <li key={review._id}>
               <strong>{review.username}</strong> - {review.rating}/5
               <p>{review.reviewText}</p>
-              <p>{new Date(review.createdAt).toLocaleDateString()}</p>
+              <p>Skapad: {review.created ? new Date(review.created).toLocaleDateString() : ""}</p>
             </li>
           ))}
         </ul>
       ) : (
         <p>Denna bok har inte fått någon recension än</p>
       )}
-
-      {/* Till formulär för att skriva recension */}
-      
-      {book && (
-        <Link
-          to={`/create-review/${book.id}`} >
-          Skriv recension
-        </Link>
-      )}
-
-
-      {/* Tillbaks till startsida */}
-      <Link to="/">Tillbaka</Link>
     </div>
   )
 }

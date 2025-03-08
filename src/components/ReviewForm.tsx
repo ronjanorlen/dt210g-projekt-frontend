@@ -1,12 +1,17 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { ReviewInterface } from "../types/ReviewInterface"
 import { useAuth } from "../context/AuthContext"
-import { useParams } from "react-router-dom"
+import { useParams, useLocation, Link } from "react-router-dom"
 
 const ReviewForm = () => {
 
     const { bookId } = useParams<{ bookId: string }>(); // Bokid från url 
+
+    const { state } = useLocation() as { state? : { title?: string } }; // state från url 
+    const bookTitle = state?.title || "Ingen titel"; // boktitel
+
     const { user } = useAuth(); // Hämta användare 
+
 
     // States 
     const [reviewText, setReviewText] = useState(""); // recensionstext, tom från start 
@@ -22,12 +27,18 @@ const ReviewForm = () => {
         setError(null);
         setSuccess(null);
 
+         if (!user?._id) {
+             setError("Du måste logga in för att kunna lämna en recension");
+             return;
+        }
+
         const review: ReviewInterface = {
             bookId: bookId || "",
+            bookTitle: bookTitle,
+            userId: user._id,
             reviewText,
             rating,
-            username: "",
-            createdAt: ""
+            username: user.username
         };
 
         console.log("skickar data: ", review); // Ta bort sen 
@@ -50,10 +61,10 @@ const ReviewForm = () => {
             }
 
             console.log(review); // ta bort sen 
-            const resData = await res.json(); // fixa 
+            const resData = await res.json(); 
 
             // annars kör på 
-            setSuccess("Recension har skapats!"); // lyckat meddelande 
+            setSuccess(resData.message || "Recension har skapats!"); // lyckat meddelande 
             setReviewText(""); // rensa recensionstext
             setRating(1); // sätt rating till 1 igen 
 
@@ -69,12 +80,17 @@ const ReviewForm = () => {
     }
 
     return (
+        
         <div className="form-container">
             <h3>Skriv en recension</h3>
+            <h4>Bok: {bookTitle}</h4>
 
             {error && <p className="error-msg">{error}</p>}
 
             {success && <p className="success-msg">{success}</p>}
+
+             {/* Gå tillbaka till bokdetaljer */}
+             <Link to={`/book/${bookId}`}>Backa</Link>
 
             {/* Formulär */}
             <form className="reviewForm" onSubmit={handleSubmit}>
@@ -99,8 +115,8 @@ const ReviewForm = () => {
                 <button type="submit" disabled={loading}>
                     {loading ? "Sparar..." : "Skapa recension"}
                 </button>
-
             </form>
+            
         </div>
     )
 }
