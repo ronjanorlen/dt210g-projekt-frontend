@@ -75,7 +75,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     // Anropa checkToken
     useEffect(() => {
         checkToken();
-    }, [])
+    }, []);
 
     // Logga ut användare 
     const logout = async () => {
@@ -90,9 +90,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
             // Vid fel 
             if (!res.ok) throw new Error("Misslyckad utloggning");
-
-            // Annars töm localstorage och användare 
-            //  localStorage.removeItem("token");
             setUser(null);
 
         } catch (error) {
