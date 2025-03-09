@@ -31,54 +31,43 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
             // Om korrekt 
             const data = await res.json() as AuthResponse;
-            // Använd data, får med användare och token 
-          // localStorage.setItem("token", data.token); // spara i localstorage (sätt till userId istället?) 
-            
-          console.log("före setUser", data.user); // testlogg, ta bort sen 
+            console.log("Data från inloggning: ", data);
 
-          setUser(data.user);
-        console.log("efter setUser", data); // ta bort 
-
-          //  await checkToken();
+            if (data.user) {
+                setUser(data.user);
+            } else {
+                console.error("Misslyckad inloggning");
+                throw new Error("Det blev något fel vid inloggning");
+            }
 
             // Fånga fel 
         } catch (error) {
-            throw error;
+            console.error("Misslyckad inloggning", error);
+            throw new Error("Misslyckad inloggning");
         }
     }
 
     // Metod för att kontrollera om användaren är inloggad och slippa logga in på nytt vid sidomladdning
     const checkToken = async () => {
-      //  const token = localStorage.getItem("token");
+
         try {
             const res = await fetch("http://localhost:5000/checkuser", {
                 method: "GET",
                 credentials: "include",
                 headers: {
                     "Accept": "application/json",
-                    "Content-Type": "application/json",
-                  //  "Authorization": "Bearer " + token
+                    "Content-Type": "application/json"
                 }
             });
-
-         //  console.log("Server-response: ", res);
-
-         if (res.status === 401) {
-            console.warn("Ingen giltig session hittad");
-            setUser(null);
-            return;
-         }
 
             if (!res.ok) throw new Error("Hittade ingen session"); // Vid ev fel 
 
             const data = await res.json();
-       //    console.log("Hämtad användare: ", data); // Ta bort sen
-         setUser(data.user.user);
+            setUser(data.user.user || data.user);
 
             // Fånga fel 
         } catch (error) {
             console.error("Något gick fel vid kontroll av session");
-         //   localStorage.removeItem("token");
             setUser(null);
         }
     }
@@ -103,7 +92,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             if (!res.ok) throw new Error("Misslyckad utloggning");
 
             // Annars töm localstorage och användare 
-          //  localStorage.removeItem("token");
+            //  localStorage.removeItem("token");
             setUser(null);
 
         } catch (error) {
