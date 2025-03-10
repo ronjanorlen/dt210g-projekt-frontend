@@ -1,5 +1,6 @@
 import { useState } from "react"
 import BookList from "../components/BookList" // Komponent för lista med böcker 
+import "./css/HomePage.css"
 
 
 const HomePage = () => {

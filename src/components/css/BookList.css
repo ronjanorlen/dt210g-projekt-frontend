@@ -1,0 +1,98 @@
+/* Böcker */
+.bookList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 20px; 
+    padding: 3rem 0;
+    background-color: #f8f9fa;
+    justify-content: center;
+}
+
+.bookItem {
+    padding: 1.5rem;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 5px 15px 0px;
+    background: white;
+    text-align: center;
+}
+
+.bookItem:hover {
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
+
+.bookImage {
+    max-width: 100%;
+    height: auto;
+}
+
+.bookInfo {
+    margin-top: 10px;
+}
+
+/* Paginering */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; 
+    margin-top: 20px;
+    font-size: 1rem;
+    flex-wrap: wrap;
+}
+
+.pagination button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #786B89;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.pagination button:hover {
+    background-color: #554865;
+}
+
+.pagination button:disabled {
+    background-color: #d1c3e3;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Media queries */
+@media (max-width: 1024px) {
+    .bookList {
+        grid-template-columns: repeat(3, 1fr); 
+    }
+}
+
+@media (max-width: 768px) {
+    .bookList {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+
+    .pagination {
+        flex-direction: column; 
+        gap: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .bookList {
+        grid-template-columns: 1fr; 
+    }
+
+    .bookItem {
+        padding: 1rem; 
+    }
+
+    .pagination button {
+        width: 100%; 
+    }
+}

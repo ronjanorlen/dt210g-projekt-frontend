@@ -1,1 +1,14 @@
-
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #DFC9CE;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+  }
+  /*
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  } */
