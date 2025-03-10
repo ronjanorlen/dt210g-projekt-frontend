@@ -17,7 +17,7 @@ const CreateReviewPage = () => {
     // States 
     const [reviewText, setReviewText] = useState(""); // recensionstext, tom från start 
     const [rating, setRating] = useState(1); // rating - 1 från start 
-    const [loading, setLoading] = useState(false);
+   // const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
     const [validationErrors, setValidationErrors] = useState<{ [key: string]: string }>({}); // valideringsfel 
@@ -31,13 +31,13 @@ const CreateReviewPage = () => {
     // Hantera recensionen 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setLoading(true);
+    //    setLoading(true);
         setError(null);
         setSuccess(null);
 
         if (!user?._id) {
             setError("Du måste logga in för att kunna lämna en recension");
-            setLoading(false);
+          //  setLoading(false);
             return;
         }
 
@@ -50,7 +50,7 @@ const CreateReviewPage = () => {
             username: user.username
         };
 
-        console.log("skickar data: ", review); // Ta bort sen 
+      //  console.log("skickar data: ", review); // Ta bort sen 
 
         // POST-anrop
         try {
@@ -60,7 +60,6 @@ const CreateReviewPage = () => {
             setValidationErrors({});
             setError(null);
             setSuccess(null);
-
 
 
             const res = await fetch("http://localhost:5000/reviews", {
