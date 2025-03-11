@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { ReviewInterface } from "../types/ReviewInterface"
 import * as Yup from "yup";
+import "./css/MyReviews.css"
 
 
 const MyReviews = () => {
@@ -158,7 +159,7 @@ const MyReviews = () => {
   return (
 
     <div className="userReviews">
-      <h2>Mina recensioner</h2>
+      <h2>Befintliga recensioner</h2>
 
       {error && <p className="error-msg">{error}</p>}
 
@@ -177,7 +178,7 @@ const MyReviews = () => {
                       onChange={(e) => setUpdatedText(e.target.value)}
                     />
 
-                    {validationErrors.reviewText && <p>{validationErrors.reviewText}</p>}
+                    {validationErrors.reviewText && <p className="err-rev">{validationErrors.reviewText}</p>}
 
                     <input
                       type="number"
@@ -189,28 +190,27 @@ const MyReviews = () => {
                       onChange={(e) => setUpdatedRating(Number(e.target.value))}
                     />
 
-                    {validationErrors.rating && <p>{validationErrors.rating}</p>}
+                    {validationErrors.rating && <p className="err-rev">{validationErrors.rating}</p>}
 
-                    <button type="submit">Spara</button>
-                    <button type="button" onClick={() => setEditingReview(null)}>Avbryt</button>
+                    <button className="save-btn" type="submit"><i className="fa-solid fa-check"></i> Spara</button>
+                    <button className="cancel-btn" type="button" onClick={() => setEditingReview(null)}><i className="fa-solid fa-xmark"></i> Avbryt</button>
                   </form>
-                  <hr />
                 </>
               ) : (
                 <>
-                  <p>{review.bookTitle}</p>
-                  <p>Betyg: {review.rating}/5</p>
-                  <p>{review.reviewText}</p>
-                  <p>Skapad: {review.created ? new Date(review.created).toLocaleDateString() : ""}</p>
-                  <button onClick={() => deleteReview(review._id ?? "")}>Ta bort</button>
-                  <button onClick={() => {
+                  <h3>{review.bookTitle}</h3>
+                  <p><strong>Betyg:</strong> {review.rating}/5</p>
+                  <p><em>{review.reviewText}</em></p>
+                  <p><strong>Skapad:</strong> {review.created ? new Date(review.created).toLocaleDateString() : ""}</p>
+                  <button className="delete-btn" onClick={() => deleteReview(review._id ?? "")}><i className="fa-solid fa-trash-can"></i> Ta bort</button>
+                  <button className="edit-btn" onClick={() => {
                     setEditingReview(review);
                     setUpdatedText(review.reviewText);
                     setUpdatedRating(review.rating);
                   }}>
-                    Redigera
+                   <i className="fa-regular fa-pen-to-square"></i> Redigera
                   </button>
-                  <hr />
+                  
                 </>
               )}
             </div>

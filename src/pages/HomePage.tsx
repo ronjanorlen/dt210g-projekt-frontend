@@ -1,6 +1,7 @@
 import { useState } from "react"
 import BookList from "../components/BookList" // Komponent för lista med böcker 
 import "./css/HomePage.css"
+import homeimage from "../assets/img/homeimage.jpg"
 
 
 const HomePage = () => {
@@ -10,9 +11,24 @@ const HomePage = () => {
 
 
   return (
-    <div>
+    <>
       <h1>Startsida</h1>
-      <h2>Sök</h2>
+
+      {/* Bild på startsida */}
+      <div style={{ width: "100%" }}>
+        <img
+          src={homeimage}
+          alt="Spiderman sitter i en murport med en bok i handen"
+          style={{
+            width: "100%",
+            height: "auto",
+            display: "block",
+            maxHeight: "600px",
+            objectFit: "cover"
+          }}
+        />
+      </div>
+      <h2>Sök <i className="fa-solid fa-magnifying-glass"></i></h2>
       {/* Sökformulär */}
       <form className="search-form">
         <label htmlFor="search"></label>
@@ -20,7 +36,7 @@ const HomePage = () => {
       </form>
       {/* Booklist-komponent med searchprop */}
       <BookList query={search || "subject:fiction"} />
-    </div>
+    </>
   )
 }
 
