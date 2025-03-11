@@ -3,6 +3,7 @@ import { BookInterface } from "../types/BookInterface"
 import { ReviewInterface } from "../types/ReviewInterface"
 import { Link } from "react-router-dom"
 import { useParams } from "react-router-dom"
+import "./css/BookInfoPage.css"
 
 // Sida för enskild bok. kunna skapa recensioner här? 
 
@@ -114,13 +115,13 @@ const BookInfoPage = () => {
       )}
 
       {/* Tillbaks till startsida */}
-      <Link to="/">Tillbaka</Link>
+      <Link to="/"><i className="fa-solid fa-reply"></i> Tillbaka</Link>
 
       {/* Till formulär för att skriva recension */}
       {book && (
         <Link
           to={`/create-review/${book.id}`} state={{ title: book.volumeInfo.title }} >
-          Skriv recension
+          Skriv recension <i className="fa-solid fa-pencil"></i>
         </Link>
       )}
 
@@ -132,7 +133,7 @@ const BookInfoPage = () => {
           {reviews.map((review) => (
             <div key={review._id}>
               <strong>{review.username}</strong> - {review.rating}/5
-              <p>{review.reviewText}</p>
+              <p><i className="fa-solid fa-quote-left"></i> {review.reviewText} <i className="fa-solid fa-quote-right"></i></p>
               <p>Skapad: {review.created ? new Date(review.created).toLocaleDateString() : ""}</p>
               <hr />
             </div>

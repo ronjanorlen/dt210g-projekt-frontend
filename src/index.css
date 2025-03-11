@@ -1,14 +1,27 @@
 body {
-    margin: 0;
-    padding: 0;
-    background-color: #DFC9CE;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    display: flex;
-    flex-direction: column;
-  }
-  /*
-  #root {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  } */
+  margin: 0;
+  padding: 0;
+  background-color: #DFC9CE;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Fontstyling */
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Oswald", sans-serif;
+}
+
+p {
+  font-family: "Montserrat", sans-serif;
+  line-height: 1.5em;
+}

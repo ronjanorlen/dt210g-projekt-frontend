@@ -82,6 +82,7 @@ const CreateAccountPage = () => {
     <div className="login-container">
       <div className="login-box">
         <h2>Skapa konto</h2>
+        <p>Ange det användarnamn du vill ha samt ett lösenord du kommer ihåg</p>
 
         <form className="loginForm" onSubmit={handleSubmit}>
 
@@ -95,7 +96,7 @@ const CreateAccountPage = () => {
               onChange={(e) => setUsername(e.target.value)}
             />
 
-            {errors.username && <p>{errors.username}</p>}
+            {errors.username && <p className="error-msg">{errors.username}</p>}
           </div>
 
           <div className="form-group">
@@ -108,9 +109,9 @@ const CreateAccountPage = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            {errors.password && <p>{errors.password}</p>}
+            {errors.password && <p className="error-msg">{errors.password}</p>}
           </div>
-          <button className="loginBtn" type="submit">Skapa konto</button>
+          <button className="loginBtn" type="submit"><i className="fa-solid fa-user-plus"></i> Skapa konto</button>
         </form>
       </div>
     </div>

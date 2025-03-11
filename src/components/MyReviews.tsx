@@ -14,6 +14,7 @@ const MyReviews = () => {
   const [updatedText, setUpdatedText] = useState(""); // Uppdaterad recensionstext 
   const [updatedRating, setUpdatedRating] = useState(1); // uppdaterad rating  
   const [validationErrors, setValidationErrors] = useState<{ [key: string]: string }>({}); // valideringsfel 
+  const [loading, setLoading] = useState(false); // Laddning 
 
 
   // useEffect för att hämta in recensioner
@@ -25,6 +26,10 @@ const MyReviews = () => {
   const fetchReviews = async () => {
 
     try {
+
+      setLoading(true);
+      setError(null);
+
       const res = await fetch(`http://localhost:5000/reviews/user`, {
         method: "GET",
         credentials: "include"
@@ -51,6 +56,8 @@ const MyReviews = () => {
     } catch (error) {
       console.error(error);
       setError("Misslyckades med att hämta recensioner");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -157,9 +164,13 @@ const MyReviews = () => {
 
 
   return (
-
     <div className="userReviews">
       <h2>Befintliga recensioner</h2>
+
+
+      {loading && (
+        <p>Hämtar recensioner..</p>
+      )}
 
       {error && <p className="error-msg">{error}</p>}
 
@@ -208,16 +219,16 @@ const MyReviews = () => {
                     setUpdatedText(review.reviewText);
                     setUpdatedRating(review.rating);
                   }}>
-                   <i className="fa-regular fa-pen-to-square"></i> Redigera
+                    <i className="fa-regular fa-pen-to-square"></i> Redigera
                   </button>
-                  
+
                 </>
               )}
             </div>
           ))}
         </ul>
       ) : (
-        <p>Du har inte skrivit några recensioner ännu</p>
+        <p>Du har inte skrivit några recensioner ännu <i className="fa-regular fa-face-frown"></i></p>
       )}
     </div>
   );

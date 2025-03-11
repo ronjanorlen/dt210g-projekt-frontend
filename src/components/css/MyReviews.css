@@ -30,11 +30,11 @@ ul {
 }
 
 .delete-btn {
-    background-color:#d81616;
+    background-color: #d81616;
 }
 
 .delete-btn:hover {
-    background-color:#ac1010;
+    background-color: #ac1010;
 }
 
 edit-btn {
@@ -42,11 +42,11 @@ edit-btn {
 }
 
 .save-btn {
-    background-color:#6e8b8e;
+    background-color: #6e8b8e;
 }
 
 .save-btn:hover {
-    background-color:#45585a;
+    background-color: #45585a;
 }
 
 .cancel-btn {
@@ -64,7 +64,7 @@ edit-btn {
 }
 
 .err-rev {
-    color:#d81616;
+    color: #d81616;
 }
 
 textarea {

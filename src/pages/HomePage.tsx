@@ -12,7 +12,7 @@ const HomePage = () => {
 
   return (
     <>
-      <h1>Startsida</h1>
+      <h1>Välkommen</h1>
 
       {/* Bild på startsida */}
       <div style={{ width: "100%" }}>
