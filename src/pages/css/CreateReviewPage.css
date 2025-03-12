@@ -1,0 +1,89 @@
+.backToBook {
+    text-decoration: none;
+    color: beige;
+    border-radius: 4px;
+    padding: 8px 20px;
+    background-color: #8e7fe4;
+}
+
+.backToBook:hover {
+    background-color: #5e51a7;
+}
+
+#error-message {
+    color: red;
+}
+
+.success-msg {
+    color: #2bac47;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.reviewForm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+label {
+    font-size: 16px;
+}
+
+textarea,
+select {
+    width: 80%;
+    padding: 10px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+select {
+    width: 40%;
+}
+
+.addBtn {
+    background-color: #285fa7;
+    width: 80%;
+    color: white;
+    padding: 10px;
+    margin: 10px auto;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #17427a;
+}
+
+
+/* Media queries */
+@media (max-width: 600px) {
+    .form-container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    textarea {
+        height: 100px;
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    button {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+}

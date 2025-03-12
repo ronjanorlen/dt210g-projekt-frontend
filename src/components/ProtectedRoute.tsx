@@ -6,9 +6,9 @@ interface ProtectedRouteProps {
     children: ReactNode
 }
 
-const ProtectedRoute : React.FC<ProtectedRouteProps> = ({children}) => {
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     // Kolla om det finns en användare 
-    const {user} = useAuth();
+    const { user } = useAuth();
     // om det inte finns inloggad användare, ersätt nuvarande url till login, skicka till logga in-sida 
     if (!user) {
         return <Navigate to="/login" replace />

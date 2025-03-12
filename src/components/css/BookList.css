@@ -1,3 +1,40 @@
+/* Loader */
+.loader {
+    display: flex;
+    margin: 0 auto;
+}
+
+.loader {
+    border: 4px solid rgba(85, 11, 73, 0.1);
+    border-left-color: transparent;
+    border-radius: 50%;
+}
+
+.loader {
+    border: 4px solid rgba(85, 11, 73, 0.1);
+    border-left-color: transparent;
+    width: 36px;
+    height: 36px;
+}
+
+.loader {
+    border: 4px solid rgba(85, 11, 73, 0.1);
+    border-left-color: transparent;
+    width: 36px;
+    height: 36px;
+    animation: spin89345 1s linear infinite;
+}
+
+@keyframes spin89345 {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 /* Böcker */
 .bookList {
     display: grid;
@@ -30,17 +67,23 @@
     margin: 10px 0;
 }
 
+.bookInfo p {
+    margin-bottom: 20px;
+}
+
 .bookInfoBtn {
     text-decoration: none;
     color: #fafafa;
     background-color: #5d4d72;
     padding: 8px 22px;
     border-radius: 5px;
+    margin-top: 20px;
 }
 
 .bookInfoBtn:hover {
     background-color: #2d213d;
 }
+
 
 /* Paginering */
 .pagination {
@@ -105,7 +148,12 @@
         padding: 1rem;
     }
 
+    .bookItem:hover {
+        transform: none;
+        transition: none;
+    }
+
     .pagination button {
-        width: 100%;
+        width: 90%;
     }
 }

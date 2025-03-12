@@ -84,16 +84,14 @@ const BookInfoPage = () => {
   return (
 
     <div className="bookDet">
+
       <h1>Bokdetaljer</h1>
+      {/* Tillbaks till startsida */}
+      <Link to="/" className="backToStart"><i className="fa-solid fa-chevron-left"></i> Alla böcker</Link>
+
 
       {/* I väntan på api */}
-      {loading && (
-        <div className="waiting">
-          <p>
-            <em>Hämtar bok..</em>
-          </p>
-        </div>
-      )}
+      {loading && <div className="loader"></div>}
 
       {error && <p className="error-msg">{error}</p>}
 
@@ -114,31 +112,32 @@ const BookInfoPage = () => {
         !loading && <p>Ingen bok hittades.</p>
       )}
 
-      {/* Tillbaks till startsida */}
-      <Link to="/"><i className="fa-solid fa-reply"></i> Tillbaka</Link>
 
       {/* Till formulär för att skriva recension */}
       {book && (
         <Link
-          to={`/create-review/${book.id}`} state={{ title: book.volumeInfo.title }} >
-          Skriv recension <i className="fa-solid fa-pencil"></i>
+          to={`/create-review/${book.id}`} state={{ title: book.volumeInfo.title }} className="addRev">
+          Skriv en recension <i className="fa-solid fa-pencil"></i>
         </Link>
       )}
+      <p className="obs"><em>*Du måste vara inloggad för att skriva en recension</em></p>
 
 
       {/* Skriv ut recensioner för boken */}
       <h2>Recensioner</h2>
+
       {reviews.length > 0 ? (
-        <ul>
+        <div>
           {reviews.map((review) => (
             <div key={review._id}>
-              <strong>{review.username}</strong> - {review.rating}/5
+              <p><strong>Av: {review.username}</strong></p>
+              <p>Betyg: {review.rating}/5</p>
               <p><i className="fa-solid fa-quote-left"></i> {review.reviewText} <i className="fa-solid fa-quote-right"></i></p>
-              <p>Skapad: {review.created ? new Date(review.created).toLocaleDateString() : ""}</p>
+              <p><em>Skapad: {review.created ? new Date(review.created).toLocaleDateString() : ""}</em></p>
               <hr />
             </div>
           ))}
-        </ul>
+        </div>
       ) : (
         <p>Denna bok har inte fått någon recension än</p>
       )}

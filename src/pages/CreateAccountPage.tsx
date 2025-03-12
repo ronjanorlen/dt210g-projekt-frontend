@@ -2,6 +2,7 @@ import * as Yup from "yup";
 import { useState } from "react";
 import { NewAccountInterface } from "../types/NewAccountInterface";
 import { useNavigate } from "react-router-dom";
+import "./css/CreateAccountPage.css"
 
 const CreateAccountPage = () => {
 

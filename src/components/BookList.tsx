@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import "./css/BookList.css"
 
 
-const default_query = "subject:fiction"; // sätt ficton som default
-const pageSize = 15; // Sätt 15 böcker på varje sida 
+const default_query = "subject:fiction"; // sätt fiction som default
+const pageSize = 20; // Sätt 20 böcker på varje sida 
 
 // Hämta böcker från google books, håll koll på paginering, sätt 40 som max i resultatet
 const fetchBooks = async (query: string, maxResults: number = pageSize, startIndex: number = 0) => {
@@ -44,6 +44,7 @@ const BookList = ({ query }: { query: string }) => {
             const startIndex = (page - 1) * pageSize;
             const { books, totalBooks } = await fetchBooks(searchQuery, pageSize, startIndex);
 
+
             if (error) {
                 setError(error);
             } else {
@@ -59,9 +60,10 @@ const BookList = ({ query }: { query: string }) => {
 
     return (
         <>
-            <div className="bookList">
 
-                {loading && <p>Hämtar böcker...</p>}
+            {loading && <div className="loader"></div>}
+
+            <div className="bookList">
 
                 {error && <p className="error">{error}</p>}
 
@@ -85,15 +87,17 @@ const BookList = ({ query }: { query: string }) => {
                         </div>
                     ))
                 ) : !loading && !error ? (
-                    <p>Hittade inga böcker</p>
+                    <p id="noBooks">Hittade inga böcker...</p>
                 ) : null}
+
             </div>
+
             {/* Paginering */}
             <div className="pagination">
-                <button disabled={page === 1} onClick={() => setPage(page - 1)}><i className="fa-solid fa-chevron-left"></i> Föregående</button>
+                <button disabled={page === 1} onClick={() => { setPage(page - 1); window.scrollTo(0, 9); }}><i className="fa-solid fa-chevron-left"></i> Föregående</button>
                 <span>Sida {page} av {Math.ceil(totalBooks / pageSize)}</span>
 
-                <button disabled={page * pageSize >= totalBooks} onClick={() => setPage(page + 1)}>
+                <button disabled={page * pageSize >= totalBooks} onClick={() => { setPage(page + 1); window.scrollTo(0, 0); }}>
                     Nästa <i className="fa-solid fa-chevron-right"></i>
                 </button>
 

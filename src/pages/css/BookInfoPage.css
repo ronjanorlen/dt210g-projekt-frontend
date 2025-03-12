@@ -1,0 +1,37 @@
+div.bookDet p,
+div.bookDet img {
+    margin-bottom: 20px;
+}
+
+div.bookDet p {
+    margin-top: 15px;
+}
+
+.obs {
+    font-size: 14px;
+    ;
+}
+
+.backToStart {
+    text-decoration: none;
+    color: beige;
+    border-radius: 4px;
+    padding: 8px 20px;
+    background-color: #8e7fe4;
+}
+
+.backToStart:hover {
+    background-color: #5e51a7;
+}
+
+.addRev {
+    text-decoration: none;
+    color: beige;
+    border-radius: 4px;
+    padding: 8px 20px;
+    background-color: #120a3d;
+}
+
+.addRev:hover {
+    background-color: #160672;
+}

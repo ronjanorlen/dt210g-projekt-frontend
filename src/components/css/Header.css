@@ -80,7 +80,7 @@ header nav {
 
     .nav-links {
         flex-direction: column;
-        gap: 10px;
+        gap: 15px;
         width: 100%;
         text-align: center;
         margin: 12px 0;

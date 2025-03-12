@@ -8,6 +8,14 @@ const HomePage = () => {
 
   // States 
   const [search, setSearch] = useState(""); // Sökfält 
+  const [genre, setGenre] = useState("fiction"); // Genre, förvalt med fiction
+
+  const genres = ["Fiction", "Mystery", "Fantasy", "Romance", "History"]; // Lista med genrer 
+
+  // Välj genre 
+  const handleGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setGenre(e.target.value);
+  }
 
 
   return (
@@ -29,13 +37,26 @@ const HomePage = () => {
         />
       </div>
       <h2>Sök <i className="fa-solid fa-magnifying-glass"></i></h2>
+
       {/* Sökformulär */}
       <form className="search-form">
         <label htmlFor="search"></label>
-        <input type="text" id="search" placeholder="Sök efter bok" value={search} onChange={(e) => setSearch(e.target.value)} />
+        <input type="text" id="search" placeholder="Ange bok eller författare" value={search} onChange={(e) => setSearch(e.target.value)} />
       </form>
-      {/* Booklist-komponent med searchprop */}
-      <BookList query={search || "subject:fiction"} />
+
+      {/* Dropdown med genrer */}
+      <div className="genre">
+        <label htmlFor="genre">Välj från genre:</label>
+        <select id="genre" value={genre} onChange={handleGenreChange}>
+          {/* Loopa genre-listan */}
+          {genres.map((gen) => (
+            <option key={gen} value={gen}>{gen}</option>
+          ))}
+        </select>
+      </div>
+
+      {/* Booklist-komponent med searchprop och genre */}
+      <BookList query={search || `subject:${genre}`} />
     </>
   )
 }

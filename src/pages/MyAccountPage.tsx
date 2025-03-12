@@ -1,5 +1,6 @@
 import { useAuth } from "../context/AuthContext"
 import MyReviews from "../components/MyReviews";
+import "./css/MyAccountPage.css"
 
 const MyAccountPage = () => {
 

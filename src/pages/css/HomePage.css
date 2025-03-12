@@ -27,6 +27,23 @@
   font-style: italic;
 }
 
+/* Dropdown med genrer */
+.genre {
+  margin: 2em 0;
+}
+
+.genre label {
+  font-size: 1.2em;
+  margin-right: 15px;
+}
+
+.genre select {
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 5px;
+  width: 150px;
+}
+
 /* Media queries */
 @media (max-width: 768px) {
   .search-form {

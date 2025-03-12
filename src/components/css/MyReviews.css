@@ -1,3 +1,39 @@
+#loader {
+    display: flex;
+    margin: 0 auto;
+}
+
+#loader {
+    border: 4px solid rgba(85, 11, 73, 0.1);
+    border-left-color: transparent;
+    border-radius: 50%;
+}
+
+#loader {
+    border: 4px solid rgba(85, 11, 73, 0.1);
+    border-left-color: transparent;
+    width: 36px;
+    height: 36px;
+}
+
+#loader {
+    border: 4px solid rgba(85, 11, 73, 0.1);
+    border-left-color: transparent;
+    width: 36px;
+    height: 36px;
+    animation: spin89345 1s linear infinite;
+}
+
+@keyframes spin89345 {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .userReviews {
     max-width: 800px;
     margin: 0 auto;
@@ -10,15 +46,21 @@
     margin-bottom: 15px;
 }
 
+.userReviews div p {
+    line-height: 1.8em;
+}
+
 .error-msg {
     color: red;
     text-align: center;
 }
 
-ul {
-    list-style: none;
-    padding: 0;
+.success {
+    font-weight: bold;
+    color: #21982d;
+    margin-bottom: 20px;
 }
+
 
 .userReviews div {
     background: #f9f9f9;
@@ -29,6 +71,19 @@ ul {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+.save-btn,
+.cancel-btn,
+.delete-btn,
+.edit-btn {
+    padding: 8px 12px;
+    margin: 10px 5px;
+    font-size: 1em;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
 .delete-btn {
     background-color: #d81616;
 }
@@ -37,7 +92,7 @@ ul {
     background-color: #ac1010;
 }
 
-edit-btn {
+.edit-btn {
     background-color: #320d5d;
 }
 
@@ -57,7 +112,7 @@ edit-btn {
     background-color: #d25c29;
 }
 
-.userReviews form {
+.userRevForm {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -67,33 +122,19 @@ edit-btn {
     color: #d81616;
 }
 
-textarea {
+.userRevForm textarea {
     min-height: 80px;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
 }
 
-input[type="number"] {
-    width: 60px;
+.userRevForm input[type="number"] {
+    width: 70px;
+    margin: 10px auto;
     padding: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
-}
-
-button {
-    padding: 8px 12px;
-    margin: 10px 5px;
-    background-color: #320d5d;
-    font-size: 1em;
-    border: none;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-button:hover {
-    background-color: #3d3447;
 }
 
 /* Media queries */
@@ -106,7 +147,8 @@ button:hover {
         padding: 10px;
     }
 
-    button {
+    .userRevForm button {
         width: 100%;
+        margin: 0 auto;
     }
 }

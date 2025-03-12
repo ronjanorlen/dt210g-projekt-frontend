@@ -1,8 +1,9 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ReviewInterface } from "../types/ReviewInterface"
 import { useAuth } from "../context/AuthContext"
 import { useParams, useLocation, Link } from "react-router-dom"
 import * as Yup from "yup";
+import "./css/CreateReviewPage.css"
 
 
 const CreateReviewPage = () => {
@@ -17,7 +18,6 @@ const CreateReviewPage = () => {
     // States 
     const [reviewText, setReviewText] = useState(""); // recensionstext, tom från start 
     const [rating, setRating] = useState(1); // rating - 1 från start 
-    // const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
     const [validationErrors, setValidationErrors] = useState<{ [key: string]: string }>({}); // valideringsfel 
@@ -28,16 +28,27 @@ const CreateReviewPage = () => {
         rating: Yup.number().min(1, "Lägsta betyg är 1").max(5, "Högsta betyg är 5").required("Du måste sätta ett betyg"),
     });
 
+    // useEffect för att dölja meddelande efter lyckad uppdatering 
+    useEffect(() => {
+        if (success) {
+            const timer = setTimeout(() => {
+                setSuccess(null);
+            }, 3000); // Dölj efter 3 sek
+
+            return () => clearTimeout(timer); // Rensa time out 
+        }
+    }, [success]);
+
+
+
     // Hantera recensionen 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        //    setLoading(true);
         setError(null);
         setSuccess(null);
 
         if (!user?._id) {
             setError("Du måste logga in för att kunna lämna en recension");
-            //  setLoading(false);
             return;
         }
 
@@ -49,8 +60,6 @@ const CreateReviewPage = () => {
             rating,
             username: user.username
         };
-
-        //  console.log("skickar data: ", review); // Ta bort sen 
 
         // POST-anrop
         try {
@@ -77,11 +86,8 @@ const CreateReviewPage = () => {
                 throw new Error("Något blev fel vid skapande av recension");
             }
 
-            // console.log(review); // ta bort sen 
-            //  const resData = await res.json(); 
-
             // annars kör på 
-            setSuccess("Recension har skapats!"); // lyckat meddelande 
+            setSuccess("Din recension har lagts till!"); // lyckat meddelande 
             // Rensa formulär 
             setReviewText("");
             setRating(1);
@@ -101,7 +107,7 @@ const CreateReviewPage = () => {
                 setValidationErrors(errors);
             } else {
                 console.error(error);
-                setError("Det uppstod ett fel vid uppdatering av recensionen");
+                setError("Det uppstod ett fel");
             }
 
         }
@@ -110,19 +116,23 @@ const CreateReviewPage = () => {
     return (
 
         <div className="form-container">
-            <h3>Skriv en recension</h3>
-            <h4>Bok: {bookTitle}</h4>
-
-            {error && <p className="error-msg">{error}</p>}
 
             {success && <p className="success-msg">{success}</p>}
 
             {/* Gå tillbaka till bokdetaljer */}
-            <Link to={`/book/${bookId}`}>Backa</Link>
+            <Link to={`/book/${bookId}`} className="backToBook"><i className="fa-solid fa-chevron-left"></i> Tillbaks till bok</Link>
+
+            <h2>Skriv en recension</h2>
+
+            <h3>Bok: {bookTitle}</h3>
+
+            {error && <p>{error}</p>}
+
+
 
             {/* Formulär */}
             <form className="reviewForm" onSubmit={handleSubmit}>
-                <label htmlFor="reviewText">Recension:</label>
+                <label htmlFor="reviewText">Vad tyckte du om boken?</label>
                 <textarea
                     id="reviewText"
                     name="reviewText"
@@ -131,7 +141,7 @@ const CreateReviewPage = () => {
                     required>
                 </textarea>
 
-                {validationErrors.reviewText && <p>{validationErrors.reviewText}</p>}
+                {validationErrors.reviewText && <p id="error-message">{validationErrors.reviewText}</p>}
 
                 <label htmlFor="rating">Betyg:</label>
                 <select id="rating" name="rating" value={rating} onChange={(e) => setRating(Number(e.target.value))}>
@@ -144,8 +154,8 @@ const CreateReviewPage = () => {
 
                 {validationErrors.rating && <p>{validationErrors.rating}</p>}
 
-                <button type="submit">
-                    Skapa recension
+                <button type="submit" className="addBtn">
+                    <i className="fa-solid fa-plus"></i> Lägg till recension
                 </button>
             </form>
 
