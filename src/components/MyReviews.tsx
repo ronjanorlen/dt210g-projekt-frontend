@@ -54,6 +54,7 @@ const MyReviews = () => {
 
       if (res.status === 404) {
         setReviews([]); // sätt till tom array 
+        setError(null);
         return;
       }
 
@@ -196,11 +197,13 @@ const MyReviews = () => {
 
       {loading && <div id="loader"></div>}
 
+      {error && reviews.length > 0 && <p className="error-msg">{error}</p>}
 
+      {reviews.length === 0 && !error && (
+        <p>Du har inte skrivit några recensioner ännu <i className="fa-regular fa-face-frown"></i></p>
+      )}
 
-      {error && <p className="error-msg">{error}</p>}
-
-      {reviews.length > 0 ? (
+      {reviews.length > 0 && (
         <>
           {reviews.map((review) => (
             <div key={review._id}>
@@ -247,14 +250,11 @@ const MyReviews = () => {
                   }}>
                     <i className="fa-regular fa-pen-to-square"></i> Redigera
                   </button>
-
                 </>
               )}
             </div>
           ))}
         </>
-      ) : (
-        <p>Du har inte skrivit några recensioner ännu <i className="fa-regular fa-face-frown"></i></p>
       )}
     </div>
   );
