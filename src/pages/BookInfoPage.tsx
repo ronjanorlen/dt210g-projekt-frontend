@@ -99,14 +99,20 @@ const BookInfoPage = () => {
       {book ? (
         <div>
           <h2>{book.volumeInfo.title}</h2>
+
           {book.volumeInfo.authors && (
             <p>
               <strong>Av:</strong> {book.volumeInfo.authors.join(", ") || "Okänd"}
             </p>
           )}
+
+
           {book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail && (
             <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title} />
           )}
+
+          <p><strong>Beskrivning:</strong> <br /> {book.volumeInfo.description || "Det finns ingen beskrivning för denna bok"}</p>
+
         </div>
       ) : (
         !loading && <p>Ingen bok hittades.</p>
