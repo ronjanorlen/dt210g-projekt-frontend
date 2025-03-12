@@ -5,7 +5,11 @@ import { Link } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import "./css/BookInfoPage.css"
 
-// Sida för enskild bok. kunna skapa recensioner här? 
+// Rensa bort html-taggar från beskrivningen till boken 
+const cleanDesc = (html: string): string => {
+  const text = new DOMParser().parseFromString(html, "text/html");
+  return text.body.textContent || "";
+};
 
 const BookInfoPage = () => {
 
@@ -41,8 +45,15 @@ const BookInfoPage = () => {
       }
       // om ok, hämta bok 
       const data = await res.json();
+      if(!data.volumeInfo) {
+        throw new Error("Hittade ingen bok");
+      }
 
-      setBook(data);
+      // Rensa html från beskrivning
+      const cleanDescription = cleanDesc(data.volumeInfo.description || "Det finns ingen beskrivning för denna bok.");
+
+
+      setBook({ ...data, volumeInfo: { ...data.volumeInfo, description: cleanDescription} });
 
       // fånga fel 
     } catch (error) {
@@ -96,7 +107,7 @@ const BookInfoPage = () => {
       {error && <p className="error-msg">{error}</p>}
 
       {/* Skriv ut bok */}
-      {book ? (
+      {book && book.volumeInfo && (
         <div>
           <h2>{book.volumeInfo.title}</h2>
 
@@ -114,8 +125,6 @@ const BookInfoPage = () => {
           <p><strong>Beskrivning:</strong> <br /> {book.volumeInfo.description || "Det finns ingen beskrivning för denna bok"}</p>
 
         </div>
-      ) : (
-        !loading && <p>Ingen bok hittades.</p>
       )}
 
 
