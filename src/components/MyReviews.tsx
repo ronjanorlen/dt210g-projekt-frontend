@@ -45,7 +45,7 @@ const MyReviews = () => {
       setLoading(true);
       setError(null);
 
-      const res = await fetch(`http://localhost:5000/reviews/user`, {
+      const res = await fetch(`https://dt210g-projekt-backend.onrender.com/reviews/user`, {
         method: "GET",
         credentials: "include"
       });
@@ -82,7 +82,7 @@ const MyReviews = () => {
     if (!window.confirm("Vill du verkligen ta bort denna recension?")) return; // Be användare bekräfta borttagning annars avbryt 
 
     try {
-      const res = await fetch(`http://localhost:5000/reviews/${id}`, {
+      const res = await fetch(`https://dt210g-projekt-backend.onrender.com/reviews/${id}`, {
         method: "DELETE",
         credentials: "include"
       });
@@ -129,7 +129,7 @@ const MyReviews = () => {
       setSuccess(null);
 
 
-      const res = await fetch(`http://localhost:5000/reviews/${id}`, {
+      const res = await fetch(`https://dt210g-projekt-backend.onrender.com/reviews/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

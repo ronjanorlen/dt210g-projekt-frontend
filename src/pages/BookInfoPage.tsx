@@ -56,7 +56,7 @@ const BookInfoPage = () => {
   // Hämta recensioner till boken 
   const getReviews = async (bookId: string) => {
     try {
-      const res = await fetch(`http://localhost:5000/reviews?bookId=${bookId}`);
+      const res = await fetch(`https://dt210g-projekt-backend.onrender.com/reviews?bookId=${bookId}`);
 
       // om inte ok 
       if (!res.ok) {

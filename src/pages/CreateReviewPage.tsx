@@ -71,7 +71,7 @@ const CreateReviewPage = () => {
             setSuccess(null);
 
 
-            const res = await fetch("http://localhost:5000/reviews", {
+            const res = await fetch("https://dt210g-projekt-backend.onrender.com/reviews", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

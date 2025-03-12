@@ -30,7 +30,7 @@ const CreateAccountPage = () => {
       // Rensa ev fel 
       setErrors({});
 
-      const res = await fetch("http://localhost:5000/users", {
+      const res = await fetch("https://dt210g-projekt-backend.onrender.com/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

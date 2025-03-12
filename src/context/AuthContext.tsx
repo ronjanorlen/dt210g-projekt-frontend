@@ -17,7 +17,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const login = async (credentials: LoginCredentials) => {
 
         try {
-            const res = await fetch("http://localhost:5000/login", {
+            const res = await fetch("https://dt210g-projekt-backend.onrender.com/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -51,7 +51,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const checkToken = async () => {
 
         try {
-            const res = await fetch("http://localhost:5000/checkuser", {
+            const res = await fetch("https://dt210g-projekt-backend.onrender.com/checkuser", {
                 method: "GET",
                 credentials: "include",
                 headers: {
@@ -80,7 +80,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     // Logga ut användare 
     const logout = async () => {
         try {
-            const res = await fetch("http://localhost:5000/logout", {
+            const res = await fetch("https://dt210g-projekt-backend.onrender.com/logout", {
                 method: "GET",
                 credentials: "include",
                 headers: {
