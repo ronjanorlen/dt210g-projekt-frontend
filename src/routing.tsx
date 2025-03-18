@@ -30,7 +30,7 @@ const router = createBrowserRouter([
                 element: <CreateAccountPage />
             },
             {
-                path: "/my-account", // Skyddad sida - lägg till bokid för hantering av recensioner?
+                path: "/my-account", // Skyddad sida 
                 element: (
                     <ProtectedRoute>
                         <MyAccountPage />
