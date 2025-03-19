@@ -8,6 +8,7 @@ const LoginPage = () => {
   const [username, setUsername] = useState(""); /// Användarnamn 
   const [password, setPassword] = useState(""); // lösenord 
   const [error, setError] = useState(""); // Felmeddelanden 
+  const [loading, setLoading] = useState(false); // Laddning 
 
   const { login, user } = useAuth();
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ const LoginPage = () => {
     setError(""); // nollställ error-state 
 
     try {
+      setLoading(true); 
 
       await login({ username, password }); // Skicka med användarnamn och lösen 
       // Om ok, skicka användaren till profil-sida 
@@ -33,6 +35,8 @@ const LoginPage = () => {
       // fånga fel 
     } catch (error) {
       setError("Misslyckad inloggning, kontrollera inloggningsuppgifter")
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -43,6 +47,9 @@ const LoginPage = () => {
         <h2>Ange dina inloggningsuppgifter</h2>
 
         <form className="loginForm" onSubmit={handleSubmit}>
+
+        {loading && <div className="loader"></div>}
+
           {error && (
             <div className="error-msg">
               {error}
